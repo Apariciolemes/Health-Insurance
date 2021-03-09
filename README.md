@@ -16,7 +16,7 @@ Ao clonar o projeto abra o terminal e execute o comando
 - Typescript
 - Axios (Consumo de API)
 - Vuetify (Biblioteca de componentes) 
-      -link documentação https://vuetifyjs.com/en/
+      - link documentação https://vuetifyjs.com/en/
 - Boostrap
 - HTML
 - SCSS
