@@ -1,0 +1,148 @@
+body {
+	font-family: 'SF Pro Display Regular';
+	font-size: 0.875rem;
+	transition: all .3s ease;
+	color: rgba(0, 0, 0, 0.82);
+}
+
+h2,
+h3 {
+	font-family: 'SF Pro Display SemiBold';
+	font-size: 22px;
+	color: rgba(0, 0, 0, 0.82);
+}
+
+
+/* Fonts */
+
+@font-face {
+	font-family: 'SF Pro Display Bold';
+	src: url('../fonts/SFProDisplay-Bold.woff2') format('woff2'), url('../fonts/SFProDisplay-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF Pro Display SemiBold';
+	src: url('../fonts/SFProDisplay-Semibold.woff2') format('woff2'), url('../fonts/SFProDisplay-Semibold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF Pro Display Medium';
+	src: url('../fonts/SFProDisplay-Medium.woff2') format('woff2'), url('../fonts/SFProDisplay-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF Pro Display Regular';
+	src: url('../fonts/SFProDisplay-Regular.woff2') format('woff2'), url('../fonts/SFProDisplay-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SF Pro Display Light';
+	src: url('../fonts/SFProDisplay-Light.woff2') format('woff2'), url('../fonts/SFProDisplay-Light.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+// Vuetify
+
+.v-progress-circular {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 20;
+
+		svg {
+		width: 80px!important;
+    height: 80px!important;
+		}
+}
+
+.v-alert {
+	margin-bottom: 0!important;
+}
+
+.v-data-table {
+	font-family: 'SF Pro Display Regular';
+	text-transform: capitalize;
+
+	span {
+	font-family: 'SF Pro Display SemiBold';
+	font-size: 14px;
+	text-transform: capitalize;
+	color: rgba(0, 0, 0, 0.82);
+	}
+
+	.empty {
+		padding: 5rem;
+		font-family: "SF Pro Display SemiBold";
+		color: rgba(0, 0, 0, 0.82);
+		font-size:18px;
+		.icons {
+			height: 2.5rem;
+			width: 2.5rem;
+			cursor: default;
+		}
+	}
+}
+
+//Transitions
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
+@keyframes slide-in {
+	from {
+		transform: translateY(-30px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes slide-out {
+	from {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-30px);
+		opacity: 0;
+	}
+}
+
+.slide-enter-active {
+	animation: slide-in 0.3s ease;
+}
+
+.slide-leave-active {
+	animation: slide-out 0.3s ease;
+}
+
+
+/*Icons */
+
+.svg-inline--fa {
+	height: 1.3rem;
+	cursor: pointer;
+}
