@@ -133,6 +133,8 @@ export default Vue.extend({
         date: "",
         work: "",
       };
+
+     this.$emit("listPlans", [])
     },
     parseClient(): object {
       return {
@@ -142,7 +144,7 @@ export default Vue.extend({
          datanascimento: [this.formData.date]
       };
     },
-    search() {
+    search(): void {
       this.handleLoading(true);
       listPlansByCustomer(this.parseClient())
         .then((resp) => this.$emit("listPlans", resp))
