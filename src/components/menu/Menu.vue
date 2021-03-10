@@ -24,16 +24,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return {
-      visible: false as boolean
-    };
-  }
-});
-</script>
 <style lang="scss">
 .menu {
   padding-bottom: 100px;

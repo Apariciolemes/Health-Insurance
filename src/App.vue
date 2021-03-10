@@ -5,7 +5,7 @@
       class="loading w-100 h-100 position-absolute"
       color="primary"
       indeterminate
-    ></v-progress-circular>
+    />
     <main>
       <Menu />
       <div class="container">

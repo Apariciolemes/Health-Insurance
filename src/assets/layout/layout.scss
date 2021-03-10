@@ -63,10 +63,10 @@ h3 {
     background-color: rgba(0, 0, 0, 0.35);
     z-index: 20;
 
-		svg {
-		width: 80px!important;
+	svg {
+	width: 80px!important;
     height: 80px!important;
-		}
+	}
 }
 
 .v-alert {
@@ -87,11 +87,11 @@ h3 {
 	.empty {
 		padding: 5rem;
 		font-family: "SF Pro Display SemiBold";
-		color: rgba(0, 0, 0, 0.82);
-		font-size:18px;
+		color: #dcdcdc;
+		font-size:17px;
 		.icons {
-			height: 2.5rem;
-			width: 2.5rem;
+			height: 4.5rem;
+			width: 4.5rem;
 			cursor: default;
 		}
 	}
