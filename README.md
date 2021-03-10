@@ -12,7 +12,7 @@ Ao clonar o projeto abra o terminal e execute o comando
 
 **O que foi utilizado no desenvolvimento deste projeto?**
 
-- Vue.js
+- VueJS
 - Typescript
 - Axios (Consumo de API)
 - Vuetify (Biblioteca de componentes) 
@@ -21,7 +21,7 @@ Ao clonar o projeto abra o terminal e execute o comando
 - HTML
 - SCSS
 - ESlint
-- Moment (formatação de data)
+- MomentJS (formatação de data)
   - link documentação https://momentjs.com/
 - FontAwesome (Gerenciador de ícones)
 - Vue Router (Gerenciamento de rotas)
