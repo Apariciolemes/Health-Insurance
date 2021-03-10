@@ -13,26 +13,31 @@
         <v-dialog
           ref="dialog"
           v-model="modal"
-          :return-value.sync="date"
+          :return-value.sync="formData.date"
           persistent
           width="290px"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-              v-model="formData.date"
+              v-model="dateFormatted"
               label="Data de Nascimento"
               prepend-icon="mdi-calendar"
               readonly
+              hint="DD/MM/YYYY"
               v-bind="attrs"
               v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker v-model="formData.date" locale="pt-br" scrollable>
+          <v-date-picker locale="pt-br" v-model="formData.date" scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="modal = false">
               Cancelar
             </v-btn>
-            <v-btn text color="primary" @click="$refs.dialog.save(date)">
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.dialog.save(formData.date)"
+            >
               OK
             </v-btn>
           </v-date-picker>
@@ -61,7 +66,9 @@
       </div>
       <div class="col-md-12 text-right pt-0">
         <v-btn @click="clear" class="mr-4"> Limpar </v-btn>
-        <v-btn type="submit" :disabled="!formData.entity"> Buscar </v-btn>
+        <v-btn type="submit" :disabled="!formData.entity || !formData.date">
+          Buscar
+        </v-btn>
       </div>
     </form>
   </div>
@@ -74,17 +81,17 @@ import {
   getDistricts,
   listProfession,
   listEntity,
-  listPlansByCustomer
+  listPlansByCustomer,
 } from "@/service/service";
 export default Vue.extend({
   mounted() {
     this.handleLoading(true);
     getDistricts()
-      .then(resp => {
+      .then((resp) => {
         resp.forEach((item: any) => {
           this.listCitiesUF.push({
             city: item.municipio.nome,
-            uf: item.municipio.microrregiao.mesorregiao.UF.sigla
+            uf: item.municipio.microrregiao.mesorregiao.UF.sigla,
           });
           if (
             !this.listUF.includes(
@@ -106,15 +113,14 @@ export default Vue.extend({
       listCities: [] as any,
       listUF: [] as any,
       listEntity: [] as any,
-      modal: false,
       listProfession: [] as any,
       formData: {
         entity: "",
         uf: "",
         city: "",
         date: "",
-        work: ""
-      } as any
+        work: "",
+      } as any,
     };
   },
   methods: {
@@ -125,7 +131,7 @@ export default Vue.extend({
         uf: "",
         city: "",
         date: "",
-        work: ""
+        work: "",
       };
     },
     parseClient(): object {
@@ -133,18 +139,26 @@ export default Vue.extend({
         entidade: this.formData.entity,
         uf: this.formData.uf,
         cidade: this.formData.city,
-        datanascimento: ["1987-09-16"]
+         datanascimento: [this.formData.date]
       };
     },
     search() {
       this.handleLoading(true);
       listPlansByCustomer(this.parseClient())
-        .then(resp => this.$emit("listPlans", resp))
+        .then((resp) => this.$emit("listPlans", resp))
         .finally(() => this.handleLoading(false));
-    }
+    },
+  },
+  computed: {
+    dateFormatted(): string {
+      if (this.formData.date) {
+        return moment(this.formData.date).format("DD/MM/YYYY");
+      }
+      return "";
+    },
   },
   watch: {
-    "formData.uf": function(newUf: string) {
+    "formData.uf": function (newUf: string) {
       if (newUf) {
         this.listCities = [];
         this.listEntity = [];
@@ -158,34 +172,34 @@ export default Vue.extend({
         });
       }
     },
-    "formData.city": function(newCity: string) {
+    "formData.city": function (newCity: string) {
       const uf = this.formData.uf;
       if (newCity && uf) {
         this.listProfession = [];
         this.listEntity = [];
         this.handleLoading(true);
         listProfession(uf, encodeURI(newCity))
-          .then(resp => {
+          .then((resp) => {
             this.listProfession = resp.map((item: any) => item.profissao);
           })
           .catch(() => (this.listProfession = []))
           .finally(() => this.handleLoading(false));
       }
     },
-    "formData.work": function(newWork: string) {
+    "formData.work": function (newWork: string) {
       const city = this.formData.city;
       const uf = this.formData.uf;
       if (newWork && uf && city) {
         this.handleLoading(true);
         listEntity(uf, encodeURI(city), newWork)
-          .then(resp => {
+          .then((resp) => {
             this.listEntity = resp.map((item: any) => item.NomeFantasia);
           })
           .catch(() => (this.listEntity = []))
           .finally(() => this.handleLoading(false));
       }
-    }
-  }
+    },
+  },
 });
 </script>
 
