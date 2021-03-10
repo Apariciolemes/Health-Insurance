@@ -81,17 +81,17 @@ import {
   getDistricts,
   listProfession,
   listEntity,
-  listPlansByCustomer,
+  listPlansByCustomer
 } from "@/service/service";
 export default Vue.extend({
   mounted() {
     this.handleLoading(true);
     getDistricts()
-      .then((resp) => {
+      .then(resp => {
         resp.forEach((item: any) => {
           this.listCitiesUF.push({
             city: item.municipio.nome,
-            uf: item.municipio.microrregiao.mesorregiao.UF.sigla,
+            uf: item.municipio.microrregiao.mesorregiao.UF.sigla
           });
           if (
             !this.listUF.includes(
@@ -119,8 +119,8 @@ export default Vue.extend({
         uf: "",
         city: "",
         date: "",
-        work: "",
-      } as any,
+        work: ""
+      } as any
     };
   },
   methods: {
@@ -131,25 +131,25 @@ export default Vue.extend({
         uf: "",
         city: "",
         date: "",
-        work: "",
+        work: ""
       };
 
-     this.$emit("listPlans", [])
+      this.$emit("listPlans", []);
     },
     parseClient(): object {
       return {
         entidade: this.formData.entity,
         uf: this.formData.uf,
         cidade: this.formData.city,
-         datanascimento: [this.formData.date]
+        datanascimento: [this.formData.date]
       };
     },
     search(): void {
       this.handleLoading(true);
       listPlansByCustomer(this.parseClient())
-        .then((resp) => this.$emit("listPlans", resp))
+        .then(resp => this.$emit("listPlans", resp))
         .finally(() => this.handleLoading(false));
-    },
+    }
   },
   computed: {
     dateFormatted(): string {
@@ -157,10 +157,10 @@ export default Vue.extend({
         return moment(this.formData.date).format("DD/MM/YYYY");
       }
       return "";
-    },
+    }
   },
   watch: {
-    "formData.uf": function (newUf: string) {
+    "formData.uf": function(newUf: string) {
       if (newUf) {
         this.listCities = [];
         this.listEntity = [];
@@ -174,34 +174,34 @@ export default Vue.extend({
         });
       }
     },
-    "formData.city": function (newCity: string) {
+    "formData.city": function(newCity: string) {
       const uf = this.formData.uf;
       if (newCity && uf) {
         this.listProfession = [];
         this.listEntity = [];
         this.handleLoading(true);
         listProfession(uf, encodeURI(newCity))
-          .then((resp) => {
+          .then(resp => {
             this.listProfession = resp.map((item: any) => item.profissao);
           })
           .catch(() => (this.listProfession = []))
           .finally(() => this.handleLoading(false));
       }
     },
-    "formData.work": function (newWork: string) {
+    "formData.work": function(newWork: string) {
       const city = this.formData.city;
       const uf = this.formData.uf;
       if (newWork && uf && city) {
         this.handleLoading(true);
         listEntity(uf, encodeURI(city), newWork)
-          .then((resp) => {
+          .then(resp => {
             this.listEntity = resp.map((item: any) => item.NomeFantasia);
           })
           .catch(() => (this.listEntity = []))
           .finally(() => this.handleLoading(false));
       }
-    },
-  },
+    }
+  }
 });
 </script>
 
