@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = "http://localhost:8085/search"
+const baseUrl = "http://lb-aws-1105894158.sa-east-1.elb.amazonaws.com"
 const urlIBGE = "https://servicodados.ibge.gov.br/api/v1/localidades/distritos"
 
 export const listProfession = (uf: string, city: string) => axios.get(`${baseUrl}/profissao/${uf}/${city}?api-key=ddd70c32-fc98-4618-b494-a9698f824353`).then((resp) => resp.data);
