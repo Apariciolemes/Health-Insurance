@@ -9,10 +9,6 @@ Ao clonar o projeto abra o terminal e execute o comando
 
 `npm run serve`
 
-**Heroku**
-
-https://health-insuranceses.herokuapp.com/
-
 **O que foi utilizado no desenvolvimento deste projeto?**
 
 - VueJS
